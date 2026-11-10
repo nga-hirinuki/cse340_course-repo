@@ -5,6 +5,8 @@ import path from 'path';
 
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllProjects } from './src/models/projects.js';
+
 
 
 
@@ -29,20 +31,6 @@ app.set('view engine', 'ejs');
 // Tell Express where to find your templates
 app.set('views', path.join(__dirname, 'src/views'));
 
-/**
-  * Routes
-  */
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'src/views/home.html'));
-// });
-
-// app.get('/organizations', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'src/views/organizations.html'));
-// });
-
-// app.get('/projects', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'src/views/projects.html'));
-// });
 
 /**
  * Routes
@@ -60,9 +48,12 @@ app.get('/organizations', async (req, res) => {
 });
 
 app.get('/projects', async (req, res) => {
+    const projects = await getAllProjects();
     const title = 'Service Projects';
-    res.render('projects', { title });
+
+    res.render('projects', { title, projects });
 });
+
 app.get('/categories', async (req, res) => {
     const title = 'Service Project Categories';
     res.render('categories', { title });

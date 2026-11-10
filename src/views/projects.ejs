@@ -4,11 +4,48 @@
     <main>
         <h1><%= title %></h1>
         <h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-        </ul>
+     
+        <div class="projects-grid">
+    <% if (projects && projects.length > 0) { %>
+        <% projects.forEach(project => { %>
+            <div class="project-card">
+                <!-- Line 1: Project Title (Organization Name) -->
+                <h3 class="project-name">
+                    <%= project.title %>  (<%= project.organization_id === 1 ? "BrightFuture Builders" : 
+                    project.organization_id === 2 ? "GreenHarvest Growers" : "UnityServe Volunteers" %>)
+                </h3>
+                
+                <!-- Line 2: Description -->
+                <p class="project-desc">
+                    <%= project.description %>
+                </p>
+                
+                <!-- Line 3: Location / Address -->
+                <div class="project-location">
+                    <%= project.location %>
+                </div>
+                
+                <!-- Line 4: Formatted Date -->
+                <div class="project-date-row">
+                    <% 
+                        const d = new Date(project.date);
+                        const dayNum = d.getDate();
+                        const monthStr = d.toLocaleDateString('en-NZ', { month: 'long' });
+                        const weekdayStr = d.toLocaleDateString('en-NZ', { weekday: 'long' });
+                        const suffixes = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+                        const suffix = (dayNum > 3 && dayNum < 21) ? 'th' : suffixes[dayNum % 10];
+                    %><%= weekdayStr %> <%= dayNum %><%= suffix %> <%= monthStr %>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p class="no-data">No upcoming service projects found.</p>
+    <% } %>
+</div>
+
     </main>
 
     <%- include('partials/footer') %>
+
+
+    
