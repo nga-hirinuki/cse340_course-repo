@@ -1,7 +1,7 @@
 import db from './db.js'
 
 /**
- * 1. Fetches raw project details (without organization context)
+ * 1. Fetches raw project details
  */
 const getAllProjects = async () => {
     const query = `
