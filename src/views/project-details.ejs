@@ -21,6 +21,19 @@
             <%= project.organization_name %>
         </a>
     </p>
+    <!-- 6. add categories link -->
+    <p>
+    <strong>Categories:</strong> 
+    <% if (categories && categories.length > 0) { %>
+        <% categories.forEach((category, index) => { %>
+            <a href="/category/<%= category.category_id %>">
+                <%= category.category_name %>
+            </a><%= index < categories.length - 1 ? ', ' : '' %>
+        <% }) %>
+    <% } else { %>
+        No categories assigned.
+    <% } %>
+
 </main>
 
     <%- include('partials/footer') %>

@@ -1,14 +1,31 @@
 
      <%- include('partials/header') %>
-    
-    <main>
+     <!-- Update the categories page (/categories) so that each category is now a link to the category details page for that category. -->
+      <main>
         <h1><%= title %></h1>
         <p>Explore our available service opportunities by category:</p>
          <% categories.forEach(category => { %>
         <ul class="categories-list">
-            <li><%= category.category_name %></li>
+            <li> 
+                <a href="/category/<%= category.category_id %>">
+                <%= category.category_name %>
+                </a>           
+           </li>
         </ul>
          <% }); %>
-    </main>
+    
+    <!-- <main>
+        <h1><%= title %></h1>
+        <p>Explore our available service opportunities by category:</p>
+         <% categories.forEach(category => { %>
+        <ul class="categories-list">
+            <li> 
+                <a href="/category/<%= category.category_id %>">
+                <%= category.category_name %>
+                </a>           
+           </li>
+        </ul>
+         <% }); %>
+    </main> -->
 
     <%- include('partials/footer') %>

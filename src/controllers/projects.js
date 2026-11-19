@@ -1,5 +1,6 @@
 // Import any needed model functions
 import { getAllProjects, getUpcomingProjects, getProjectDetails } from '../models/projects.js';
+import { getCategoriesByProjectId } from '../models/categories.js';
 
 // Controller 1: Show all projects page
 // const showProjectsPage = async (req, res) => {
@@ -18,13 +19,14 @@ const showUpcomingProjectsPage = async (req, res) => {
     res.render('upcoming-projects', { title, projects: upcomingProjects });
 };
 
-// Controller 3: Show single project details page
+// Controller 3: Show single project details page includes the categories for that project.
 const showProjectDetailsPage = async (req, res) => {
     const projectId = req.params.id;
     const projectDetails = await getProjectDetails(projectId);
+    const categories = await getCategoriesByProjectId(projectId);
     const title = `Project Details - ${projectDetails.title}`;
 
-    res.render('project-details', { title, project: projectDetails });
+    res.render('project-details', { title, project: projectDetails, categories });
 };
 
 // Export all controller functions for your router

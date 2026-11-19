@@ -1,0 +1,27 @@
+
+     <%- include('partials/header') %>
+
+<!----Create a new category details page (/category/[id]) that displays the category name and lists all service projects for that category. Each service project name should be a link to the service project details page for that project.-->
+
+<main>
+        <h1><%= title %></h1>
+        <p>Explore our available service opportunities by category:</p>
+
+        <% if (projects && projects.length > 0 && projects[0].project_id) { %>
+            <ul class="categories-list">
+                <% projects.forEach(project => { %>
+                    <li>
+                        <!-- <a href="/project/<%= project.project_id %>"> -->
+                            <a href="/project-details/<%= project.project_id %>">
+                            <%= project.title %>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No service projects are currently assigned to this category.</p>
+        <% } %>
+         
+    </main> 
+
+    <%- include('partials/footer') %>
