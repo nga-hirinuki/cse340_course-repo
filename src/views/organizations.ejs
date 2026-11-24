@@ -1,32 +1,36 @@
 
      <%- include('partials/header') %>
     
-    <main>
-        <h1><%= title %></h1>
-        <p>Here are a few of our partner organizations:</p>
-        <ul>
-            
-            <% organizations.forEach(organization => { %>
-                <li class="card-container">
-                    <!-- Left Column: Logo -->
-                    <div class="logo-column">
+<main>
+    <h1><%= title %></h1>
+    <p>Here are a few of our partner organizations:</p>
+    <ul>
+        <% organizations.forEach(organization => { %>
+            <li class="card-container">
+                <!-- Left Column: Logo -->
+                <div class="logo-column">
+                    <a href="/organizations/<%= organization.organization_id %>">
                         <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo" class="logo">
-                    </div>
+                    </a>
+                </div>
 
-                    <!-- Right Column: Information -->
-                    <div class="info-column">
-                        <strong class="name"><%= organization.name %></strong>
-                        <p class="description"><%= organization.description %></p>
+                <!-- Right Column: Information -->
+                <div class="info-column">
+                   <strong class="name">
+                        <a href="/organization-details/<%= organization.organization_id %>">
+                            <%= organization.name %>
+                        </a>
+                   </strong>
+
+                    <p class="description"><%= organization.description %></p>
                     <div class="email">
                         <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a>
                     </div>
-                    </div>
-                </li>
-            <% }); %>
-
-
-        </ul>
-    </main>
+                </div>
+            </li>
+        <% }); %>
+    </ul>
+</main>
 
     <%- include('partials/footer') %>
         

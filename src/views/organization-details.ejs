@@ -1,0 +1,40 @@
+
+    <%- include('partials/header') %>
+
+<main>
+    <!-- 1. Single Organization Info -->
+    <h1><%= organization.name %></h1>
+    <p><%= organization.description %></p>
+    <p>
+        <strong>Contact:</strong> 
+        <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a>
+    </p>
+
+    <!-- 2. Project Cards Led by This Organization -->
+    <h2>Upcoming Service Projects</h2>
+    
+    <% if (projects && projects.length > 0) { %>
+        <div class="projects-grid">
+            <% projects.forEach(project => { %>
+                <div class="project-card">
+                    <h3>
+                        <a href="/project-details/<%= project.project_id %>">                         
+                            <%= project.title %>
+                        </a>
+                    </h3>
+                    <p><strong>Organization:</strong> <a href="/organizations %>"> <%= organization.name %></a></p>
+                    <p><%= project.description %></p>
+                    <p><strong>Date:</strong> <%= project.date %></p>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p>No upcoming projects for this organization.</p>
+    <% } %>
+</main>
+
+
+    <%- include('partials/footer') %>
+
+
+    
